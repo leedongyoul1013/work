@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── 배경 계층 ── */
+  --color-navy:   #060D1F;
+  --color-navy-2: #0B1630;
+  --color-navy-3: #0F1E40;
+
+  /* ── 브랜드 블루 ── */
+  --color-brand:  #1A4FA0;
+  --color-sky:    #3B8AE0;
+  --color-cyan:   #00C9E0;
+
+  /* ── 텍스트 ── */
+  --color-white:  #F0F5FF;
+  --color-mid:    #C0CEEA;
+  --color-muted:  #8899BB;
+
+  /* ── 폰트 ── */
+  --font-heading: var(--font-syne), 'Syne', sans-serif;
+  --font-body:    var(--font-outfit), 'Outfit', sans-serif;
+
+  /* ── 애니메이션 ── */
+  --animate-pulse-dot: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-fade-up:   fade-up 0.6s ease both;
+  --animate-fade-up-1: fade-up 0.6s 0.1s ease both;
+  --animate-fade-up-2: fade-up 0.6s 0.2s ease both;
+  --animate-fade-up-3: fade-up 0.6s 0.3s ease both;
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ── CSS 변수: rgba 값은 @theme 밖에서 정의 ── */
+:root {
+  --card-bg:     rgba(255, 255, 255, 0.04);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --cyan-glow:   rgba(0, 201, 224, 0.25);
+  --cyan-dim:    rgba(0, 201, 224, 0.10);
+  --cyan-border: rgba(0, 201, 224, 0.30);
+}
+
+/* ── 글로벌 기본 스타일 ── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #060D1F;
+    color: #F0F5FF;
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(0, 201, 224, 0.2);
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #060D1F; }
+  ::-webkit-scrollbar-thumb { background: #1A4FA0; border-radius: 2px; }
+}
+
+/* ── Hover 유틸리티 (Server Component CSS hover) ── */
+.card-hover {
+  transition: border-color 0.3s, transform 0.3s;
+}
+.card-hover:hover {
+  border-color: rgba(0,201,224,0.35) !important;
+  transform: translateY(-4px);
+}
+
+.card-hover-blue {
+  transition: border-color 0.3s, transform 0.3s;
+}
+.card-hover-blue:hover {
+  border-color: rgba(58,138,224,0.4) !important;
+  transform: translateY(-4px);
+}
+
+.arrow-btn {
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+.arrow-btn:hover {
+  background: #00C9E0 !important;
+  border-color: #00C9E0 !important;
+  color: #060D1F !important;
+}
+
+.partner-item {
+  transition: color 0.2s, background 0.2s;
+}
+.partner-item:hover {
+  color: #F0F5FF !important;
+  background: var(--card-bg) !important;
+}
+
+.tech-tag-item {
+  transition: border-color 0.2s, color 0.2s;
+}
+.tech-tag-item:hover {
+  border-color: rgba(0,201,224,0.4) !important;
+  color: #F0F5FF !important;
+}
+
+.nav-link { transition: color 0.2s; }
+.nav-link:hover { color: #F0F5FF !important; }
+
+.footer-link { transition: color 0.2s; }
+.footer-link:hover { color: #C0CEEA !important; }
+
+/* ── 공통 유틸리티 클래스 ── */
+@layer components {
+  .section-padding {
+    @apply px-6 py-20 md:px-12 lg:px-[60px] lg:py-[120px];
+  }
+
+  .card-base {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 1rem;
+  }
+
+  .card-accent-top {
+    position: relative;
+  }
+  .card-accent-top::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00C9E0, #3B8AE0, transparent);
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .section-label-el {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: #00C9E0;
+    text-transform: uppercase;
+  }
+  .section-label-el::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: #00C9E0;
+    flex-shrink: 0;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #00C9E0;
+    color: #060D1F;
+    padding: 14px 32px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 24px rgba(0, 201, 224, 0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 32px rgba(0, 201, 224, 0.45);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--card-border);
+    color: #F0F5FF;
+    padding: 14px 32px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    background: transparent;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover {
+    border-color: #3B8AE0;
+    background: rgba(58, 138, 224, 0.07);
+  }
+}
