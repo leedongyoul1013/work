@@ -19,7 +19,7 @@
   --color-sky:    #3B8AE0;
   --color-cyan:   #00C9E0;
 
-  /* ── 텍스트 ── */
+  /* ── 텍스트 (다크섹션용) ── */
   --color-white:  #F0F5FF;
   --color-mid:    #C0CEEA;
   --color-muted:  #8899BB;
@@ -46,10 +46,11 @@
   }
 }
 
-/* ── CSS 변수: rgba 값은 @theme 밖에서 정의 ── */
+/* ── CSS 변수 ── */
 :root {
-  --card-bg:     rgba(255, 255, 255, 0.04);
-  --card-border: rgba(255, 255, 255, 0.08);
+  /* 라이트 섹션용 카드 */
+  --card-bg:     #ffffff;
+  --card-border: #E5EAF2;
   --cyan-glow:   rgba(0, 201, 224, 0.25);
   --cyan-dim:    rgba(0, 201, 224, 0.10);
   --cyan-border: rgba(0, 201, 224, 0.30);
@@ -62,8 +63,8 @@
   }
 
   body {
-    background-color: #060D1F;
-    color: #F0F5FF;
+    background-color: #ffffff;
+    color: #111827;
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
@@ -74,17 +75,18 @@
   }
 
   ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: #060D1F; }
+  ::-webkit-scrollbar-track { background: #f0f4f8; }
   ::-webkit-scrollbar-thumb { background: #1A4FA0; border-radius: 2px; }
 }
 
-/* ── Hover 유틸리티 (Server Component CSS hover) ── */
+/* ── Hover 유틸리티 ── */
 .card-hover {
-  transition: border-color 0.3s, transform 0.3s;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 .card-hover:hover {
-  border-color: rgba(0,201,224,0.35) !important;
+  border-color: #1A4FA0 !important;
   transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(26, 79, 160, 0.1);
 }
 
 .card-hover-blue {
@@ -99,9 +101,9 @@
   transition: background 0.3s, border-color 0.3s, color 0.3s;
 }
 .arrow-btn:hover {
-  background: #00C9E0 !important;
-  border-color: #00C9E0 !important;
-  color: #060D1F !important;
+  background: #1A4FA0 !important;
+  border-color: #1A4FA0 !important;
+  color: #ffffff !important;
 }
 
 .partner-item {
@@ -109,7 +111,7 @@
 }
 .partner-item:hover {
   color: #F0F5FF !important;
-  background: var(--card-bg) !important;
+  background: rgba(255,255,255,0.08) !important;
 }
 
 .tech-tag-item {
@@ -146,7 +148,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, #00C9E0, #3B8AE0, transparent);
+    background: linear-gradient(90deg, #1A4FA0, #3B8AE0, transparent);
     border-radius: 1rem 1rem 0 0;
   }
 
@@ -157,23 +159,24 @@
     font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.18em;
-    color: #00C9E0;
+    color: #1A4FA0;
     text-transform: uppercase;
   }
   .section-label-el::before {
     content: '';
     width: 32px;
     height: 1px;
-    background: #00C9E0;
+    background: #1A4FA0;
     flex-shrink: 0;
   }
 
+  /* 다크/이미지 배경 위에서 사용하는 primary 버튼 */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #00C9E0;
-    color: #060D1F;
+    background: #1A4FA0;
+    color: #ffffff;
     padding: 14px 32px;
     border-radius: 6px;
     font-weight: 700;
@@ -181,19 +184,20 @@
     letter-spacing: 0.03em;
     text-decoration: none;
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 0 24px rgba(0, 201, 224, 0.3);
+    box-shadow: 0 4px 20px rgba(26, 79, 160, 0.3);
   }
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 32px rgba(0, 201, 224, 0.45);
+    box-shadow: 0 6px 30px rgba(26, 79, 160, 0.45);
   }
 
+  /* 이미지/다크 오버레이 위에서 사용하는 outline 버튼 */
   .btn-outline {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    border: 1px solid var(--card-border);
-    color: #F0F5FF;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #ffffff;
     padding: 14px 32px;
     border-radius: 6px;
     font-weight: 500;
@@ -203,7 +207,7 @@
     transition: border-color 0.2s, background 0.2s;
   }
   .btn-outline:hover {
-    border-color: #3B8AE0;
-    background: rgba(58, 138, 224, 0.07);
+    border-color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
   }
 }
